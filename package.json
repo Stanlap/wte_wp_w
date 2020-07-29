@@ -1,0 +1,37 @@
+{
+  "name": "auth_passport",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serv": "nodemon --ignore sessions/ serv/app.js",
+    "prod": "webpack --mode production --config ./build/webpack.server.config.js && webpack --config ./build/webpack.prod.config.js",
+    "start": "node serv/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "html-webpack-plugin": "^4.3.0",
+    "webpack": "^4.44.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-merge": "^5.0.9",
+    "webpack-node-externals": "^2.5.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "nedb-promises": "^4.0.4",
+    "nodemon": "^2.0.4",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "session-file-store": "^1.4.0",
+    "ws": "^7.3.0"
+  }
+}
