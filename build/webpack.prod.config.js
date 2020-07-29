@@ -1,3 +1,6 @@
+const PATHS = require('./globals');
+const webpack = require('webpack')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const {
   CleanWebpackPlugin
 } = require('clean-webpack-plugin')
@@ -66,6 +69,10 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
         ],
       },
       {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
+      },
+      {
         test: /\.html$/,
         use: [{
           loader: "html-loader",
@@ -77,6 +84,15 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      jquery: 'jquery',
+      Popper: ['popper.js', 'default']
+    }),
+    new MiniCssExtractPlugin({
+      filename: `${PATHS.assets}css/[name].[contenthash].css`,
+    }),
     new CleanWebpackPlugin()
   ]
 })

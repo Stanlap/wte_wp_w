@@ -1,9 +1,12 @@
-const express = require('express');
+const path = require('path')
+const express = require('express')
 const session = require('express-session');
-const fileStore = require('session-file-store')(session);
+const fileStore = require('session-file-store')(session)
 const passport = require('passport');
-const app = express();
-const port = 8000;
+const app = express()
+const PORT = process.env.PORT || 8000
+
+const DIST_DIR = path.resolve(__dirname, '../dist')
 
 require('./back/passport-config');
 
@@ -11,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: false
 }));
-app.use(express.static('public'));
+app.use(express.static(DIST_DIR))
 app.use(
     session({
         secret: 'obobNMN23h',
@@ -61,7 +64,8 @@ const auth = (req, res, next) =>{
     } 
    }
 
-   app.get('/', (req, res) => res.send('Main page'));
+//    app.get('/', (req, res) => res.send('Main page'));
+app.get('/', (req, res) => res.sendFile(`${DIST_DIR}/main.html`))
 app.get('/admin', auth, (req, res) => {
     res.send('Admin page')
 });
@@ -75,4 +79,7 @@ res.redirect('/');
 // app.post('/login',
 //   passport.authenticate('local', { successRedirect: '/admin' }));
 
-app.listen(port, () => console.log(`Server is listening on ${port}`))
+app.listen(PORT, () => {
+    console.log(`App listening to ${PORT}....`)
+    console.log('Press Ctrl+C to quit.')
+})
