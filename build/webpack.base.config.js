@@ -1,8 +1,11 @@
 const PATHS = require('./globals')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+
 module.exports = {
   entry: {
+    login: `${PATHS.pre_js}/login.js`,
     main: `${PATHS.pre_js}/main.js`
   },
   output: {
@@ -17,7 +20,6 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'favicon.ico',
           from: `${PATHS.src}/img`,
           to: `${PATHS.dist}/public/img`
         },
@@ -28,10 +30,21 @@ module.exports = {
       ]
     }),
     new HtmlWebpackPlugin({
-      filename: 'main.html',
+      filename: 'public/html/about_us.html',
+      template: `${PATHS.pre}/about_us.ejs`,
+      chunks: ['main']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'public/html/login.html',
+      template: `${PATHS.pre}/login.ejs`,
+      chunks: ['main', 'login']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'public/html/main.html',
       template: `${PATHS.pre}/main.ejs`,
       chunks: ['main']
-    })
+    }),
+    new FaviconsWebpackPlugin(`${PATHS.src}/img/favicon.png`)
 
   ],
 

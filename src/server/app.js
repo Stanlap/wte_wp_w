@@ -64,8 +64,10 @@ const auth = (req, res, next) =>{
     } 
    }
 
-//    app.get('/', (req, res) => res.send('Main page'));
-app.get('/', (req, res) => res.sendFile(`${DIST_DIR}/main.html`))
+app.get('/', (req, res) => res.sendFile(`${DIST_DIR}/public/html/main.html`))
+app.get('/about_us', (req, res) => res.sendFile(`${DIST_DIR}/public/html/about_us.html`))
+app.get('/login', (req, res) => res.sendFile(`${DIST_DIR}/public/html/login.html`))
+
 app.get('/admin', auth, (req, res) => {
     res.send('Admin page')
 });
