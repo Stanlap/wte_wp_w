@@ -2,7 +2,7 @@ const PATHS = require('./globals');
 const nodeExternals = require('webpack-node-externals')
 
 module.exports = (env, argv) => {
-  const serverPath = './src/server/app.js'
+  const serverPath = './src/server/app_sess.js'
   return ({
     entry: {
       server: serverPath,

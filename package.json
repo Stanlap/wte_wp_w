@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serv": "nodemon --ignore sessions/ serv/app.js",
+    "serv": "nodemon --ignore sessions/ serv/server.js",
     "prod": "webpack --mode production --config ./build/webpack.server.config.js && webpack --config ./build/webpack.prod.config.js",
     "start": "node serv/server.js"
   },

@@ -6,7 +6,8 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 module.exports = {
   entry: {
     login: `${PATHS.pre_js}/login.js`,
-    main: `${PATHS.pre_js}/main.js`
+    main: `${PATHS.pre_js}/main.js`,
+    regist: `${PATHS.pre_js}/regist.js`
   },
   output: {
     path: `${PATHS.dist}/`,
@@ -43,6 +44,16 @@ module.exports = {
       filename: 'public/html/main.html',
       template: `${PATHS.pre}/main.ejs`,
       chunks: ['main']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'public/html/main_auth.html',
+      template: `${PATHS.pre}/mainAuth.ejs`,
+      chunks: ['main']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'public/html/regist.html',
+      template: `${PATHS.pre}/regist.ejs`,
+      chunks: ['main', 'regist']
     }),
     new FaviconsWebpackPlugin(`${PATHS.src}/img/favicon.png`)
 
