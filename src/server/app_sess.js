@@ -82,8 +82,15 @@ app.get('/', (req, res) => {
 app.get('/about_us', (req, res) => res.sendFile(`${DIST_DIR}/public/html/about_us.html`))
 app.get('/login', (req, res) => res.sendFile(`${DIST_DIR}/public/html/login.html`))
 app.get('/regist', (req, res) => res.sendFile(`${DIST_DIR}/public/html/regist.html`))
-app.get('/main_auth', redirectMain, (req, res) => res.sendFile(`${DIST_DIR}/public/html/main_auth.html`))
 app.get('/chat', redirectMain, (req, res) => res.sendFile(`${DIST_DIR}/public/html/chat.html`))
+app.get('/main_auth', redirectMain, (req, res) => res.sendFile(`${DIST_DIR}/public/html/main_auth.html`))
+app.get('/prog_list', redirectMain, (req, res) => res.sendFile(`${DIST_DIR}/public/html/prog_list.html`))
+app.get('/vte_patient_profile', redirectMain, (req, res) => {
+    res.sendFile(`${DIST_DIR}/vte_watch/vte_patient_profile.html`)
+})
+app.get('/vte_user_profile', redirectMain, (req, res) => {
+    res.sendFile(`${DIST_DIR}/vte_watch/vte_user_profile.html`)
+})
 
 app.get('/home', redirectLogin, (req, res) => {
     res.send(`

@@ -8,7 +8,10 @@ module.exports = {
     chat_2: `${PATHS.pre_js}/chat_2.js`,
     login: `${PATHS.pre_js}/login.js`,
     main: `${PATHS.pre_js}/main.js`,
-    regist: `${PATHS.pre_js}/regist.js`
+    regist: `${PATHS.pre_js}/regist.js`,
+    vte_patient_profile: `${PATHS.pre_js}/vte_watch/vte_patient_profile.js`,
+    vte_user_profile: `${PATHS.pre_js}/vte_watch/vte_user_profile.js`,
+
   },
   output: {
     path: `${PATHS.dist}/`,
@@ -57,10 +60,30 @@ module.exports = {
       chunks: ['main']
     }),
     new HtmlWebpackPlugin({
+      filename: 'public/html/prog_list.html',
+      template: `${PATHS.pre}/prog_list.ejs`,
+      chunks: ['main']
+    }),
+    new HtmlWebpackPlugin({
       filename: 'public/html/regist.html',
       template: `${PATHS.pre}/regist.ejs`,
       chunks: ['main', 'regist']
     }),
+
+    // vte_watch
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.dist}/vte_watch/vte_patient_profile.html`,
+      template: `${PATHS.pre}/vte_watch/vte_patient_profile.ejs`,
+      chunks: ['main', 'vte_patient_profile']
+    }),
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.dist}/vte_watch/vte_user_profile.html`,
+      template: `${PATHS.pre}/vte_watch/vte_user_profile.ejs`,
+      chunks: ['main','vte_user_profile']
+    }),
+
+
+
     new FaviconsWebpackPlugin(`${PATHS.src}/img/favicon.png`)
 
   ],
