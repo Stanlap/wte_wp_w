@@ -39,6 +39,13 @@ const redirectLogin = (req, res, next) => {
         next()
     }
 }
+const redirectRegist = (req, res, next) => {
+    if (!req.session.userId) {
+        res.redirect('/regist')
+    } else {
+        next()
+    }
+}
 const redirectHome = (req, res, next) => {
     if (req.session.userId) {
         res.redirect('/home')
@@ -122,7 +129,7 @@ app.post('/login', (req, res) => {
         res.redirect('/login')
     })
 })
-app.post('/regist', redirectMain, (req, res) => {
+app.post('/regist', (req, res) => {
     const {
         email,
         password
@@ -136,8 +143,8 @@ app.post('/regist', redirectMain, (req, res) => {
             return res.redirect('/main_auth')
         } else {
             neDB.addNewUser(email, password[0])
-                .then(result => console.log(`User ${doc._id} is created and auth successful!`))
-            res.redirect('/home')
+                .then(result => console.log(`User ${email} is created!`))
+            res.redirect('/login')
         }
     })
 })
