@@ -6,13 +6,20 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 module.exports = {
   entry: {
     chat_2: `${PATHS.pre_js}/chat_2.js`,
+    date_manager: `${PATHS.pre_js}/general/date_manager.js`,
+    gfr: `${PATHS.pre_js}/general/gfr.js`,
     login: `${PATHS.pre_js}/login.js`,
     main: `${PATHS.pre_js}/main.js`,
+    modal_alert: `${PATHS.pre_js}/general/modal_alert.js`,
     regist: `${PATHS.pre_js}/regist.js`,
+    vte_concl: `${PATHS.pre_js}/vte_watch/vte_concl.js`,
+    vte_mirror_rf: `${PATHS.pre_js}/vte_watch/vte_mirror_rf.js`,
+    vte_obst_profile: `${PATHS.pre_js}/vte_watch/vte_obst_profile.js`,
+    vte_oper_profile: `${PATHS.pre_js}/vte_watch/vte_oper_profile.js`,
+    vte_patient_list_rf: `${PATHS.pre_js}/vte_watch/vte_patient_list_rf.js`,
     vte_patient_profile: `${PATHS.pre_js}/vte_watch/vte_patient_profile.js`,
     vte_reference: `${PATHS.pre_js}/vte_watch/vte_reference.js`,
-    vte_user_profile: `${PATHS.pre_js}/vte_watch/vte_user_profile.js`,
-
+    vte_user_profile: `${PATHS.pre_js}/vte_watch/vte_user_profile.js`
   },
   output: {
     path: `${PATHS.dist}/`,
@@ -100,7 +107,26 @@ module.exports = {
       chunks: ['main','vte_reference'],
       minify: false
     }),
-
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.dist}/vte_watch/vte_obst_profile.html`,
+      template: `${PATHS.pre}/vte_watch/vte_obst_profile.ejs`,
+      chunks: ['main', 'vte_obst_profile'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.dist}/vte_watch/vte_oper_profile.html`,
+      template: `${PATHS.pre}/vte_watch/vte_oper_profile.ejs`,
+      chunks: ['main', 'vte_oper_profile'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.dist}/vte_watch/vte_patient_list_rf.html`,
+      template: `${PATHS.pre}/vte_watch/vte_patient_list_rf.ejs`,
+      chunks: ['main','gfr', 'vte_patient_list_rf'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.dist}/vte_watch/vte_concl.html`,
+      template: `${PATHS.pre}/vte_watch/vte_concl.ejs`,
+      chunks: ['main','gfr', 'alert_modal', 'vte_concl'],
+    }),
 
     new FaviconsWebpackPlugin(`${PATHS.src}/img/favicon.png`)
 
