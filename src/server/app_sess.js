@@ -46,6 +46,13 @@ const redirectHome = (req, res, next) => {
         next()
     }
 }
+const redirectMain = (req, res, next) => {
+    if (req.session.userId) {
+        res.redirect('/')
+    } else {
+        next()
+    }
+}
 app.use((req, res, next) => {
     const {
         userId
@@ -99,7 +106,7 @@ app.get('/register', redirectHome, (req, res) => {
     `)
 })
 
-app.post('/login', redirectHome, (req, res) => {
+app.post('/login', (req, res) => {
     const {
         email,
         password
@@ -109,13 +116,13 @@ app.post('/login', redirectHome, (req, res) => {
         console.log(doc)
         if (doc) {
             req.session.userId = doc._id
-            console.log(`User ${doc._id} auth successful!`)
-            return res.redirect('/home')
+            console.log(`User ID ${doc._id} auth successful!`)
+            return res.redirect('/main_auth')
         }
         res.redirect('/login')
     })
 })
-app.post('/regist', redirectHome, (req, res) => {
+app.post('/regist', redirectMain, (req, res) => {
     const {
         email,
         password
@@ -126,7 +133,7 @@ app.post('/regist', redirectHome, (req, res) => {
         if (doc) {
             req.session.userId = doc._id
             console.log(`User ${doc._id} auth successful!`)
-            return res.redirect('/home')
+            return res.redirect('/main_auth')
         } else {
             neDB.addNewUser(email, password[0])
                 .then(result => console.log(`User ${doc._id} is created and auth successful!`))
@@ -136,15 +143,10 @@ app.post('/regist', redirectHome, (req, res) => {
 })
 
 app.get('/logout', redirectLogin, (req, res) => {
-    console.log(req.session)
-    console.log(req.session.id)
-    console.log(req.get('cookie'))
-    req.session.destroy(err => {
-        if (err) {
-            return res.redirect('/home')
-        }
+    console.log(`Session ID ${req.session.id} is destroyed`)
+    req.session.destroy(() => {
         res.clearCookie(SESS_NAME)
-        res.redirect('/home')
+        res.redirect('/')
     })
 })
 
