@@ -5,6 +5,7 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
   entry: {
+    chat_2: `${PATHS.pre_js}/chat_2.js`,
     login: `${PATHS.pre_js}/login.js`,
     main: `${PATHS.pre_js}/main.js`,
     regist: `${PATHS.pre_js}/regist.js`
@@ -26,7 +27,7 @@ module.exports = {
         },
         {
           from: `${PATHS.src}/server/back`,
-          to: `${PATHS.serv}/back_js`
+          to: `${PATHS.serv}/back`
         }
       ]
     }),
@@ -34,6 +35,11 @@ module.exports = {
       filename: 'public/html/about_us.html',
       template: `${PATHS.pre}/about_us.ejs`,
       chunks: ['main']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'public/html/chat.html',
+      template: `${PATHS.pre}/chat.ejs`,
+      chunks: ['main', 'chat_2']
     }),
     new HtmlWebpackPlugin({
       filename: 'public/html/login.html',

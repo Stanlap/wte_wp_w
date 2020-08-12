@@ -31,6 +31,7 @@ app.use(session({
     }
 }))
 const neDB = require('./back/bc_nedb')
+const wst = require('./back/chat')
 
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
@@ -54,7 +55,7 @@ const redirectHome = (req, res, next) => {
     }
 }
 const redirectMain = (req, res, next) => {
-    if (req.session.userId) {
+    if (!req.session.userId) {
         res.redirect('/')
     } else {
         next()
@@ -81,7 +82,8 @@ app.get('/', (req, res) => {
 app.get('/about_us', (req, res) => res.sendFile(`${DIST_DIR}/public/html/about_us.html`))
 app.get('/login', (req, res) => res.sendFile(`${DIST_DIR}/public/html/login.html`))
 app.get('/regist', (req, res) => res.sendFile(`${DIST_DIR}/public/html/regist.html`))
-app.get('/main_auth', redirectLogin, (req, res) => res.sendFile(`${DIST_DIR}/public/html/main_auth.html`))
+app.get('/main_auth', redirectMain, (req, res) => res.sendFile(`${DIST_DIR}/public/html/main_auth.html`))
+app.get('/chat', redirectMain, (req, res) => res.sendFile(`${DIST_DIR}/public/html/chat.html`))
 
 app.get('/home', redirectLogin, (req, res) => {
     res.send(`
