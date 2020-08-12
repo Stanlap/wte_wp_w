@@ -10,6 +10,7 @@ module.exports = {
     main: `${PATHS.pre_js}/main.js`,
     regist: `${PATHS.pre_js}/regist.js`,
     vte_patient_profile: `${PATHS.pre_js}/vte_watch/vte_patient_profile.js`,
+    vte_reference: `${PATHS.pre_js}/vte_watch/vte_reference.js`,
     vte_user_profile: `${PATHS.pre_js}/vte_watch/vte_user_profile.js`,
 
   },
@@ -81,7 +82,24 @@ module.exports = {
       template: `${PATHS.pre}/vte_watch/vte_user_profile.ejs`,
       chunks: ['main','vte_user_profile']
     }),
-
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.dist}/vte_watch/vte_reference.html`,
+      template: `${PATHS.pre}/vte_watch/vte_reference.ejs`,
+      chunks: ['main','vte_reference'],
+      minify: false
+    }),
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.dist}/vte_watch/vte_scales.html`,
+      template: `${PATHS.pre}/vte_watch/vte_scales.ejs`,
+      chunks: ['main','vte_reference'],
+      minify: false
+    }),
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.dist}/vte_watch/vte_outer_ref.html`,
+      template: `${PATHS.pre}/vte_watch/vte_outer_ref.ejs`,
+      chunks: ['main','vte_reference'],
+      minify: false
+    }),
 
 
     new FaviconsWebpackPlugin(`${PATHS.src}/img/favicon.png`)

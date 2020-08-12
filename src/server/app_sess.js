@@ -91,6 +91,16 @@ app.get('/vte_patient_profile', redirectMain, (req, res) => {
 app.get('/vte_user_profile', redirectMain, (req, res) => {
     res.sendFile(`${DIST_DIR}/vte_watch/vte_user_profile.html`)
 })
+app.get('/vte_reference', redirectMain, (req, res) => {
+    res.sendFile(`${DIST_DIR}/vte_watch/vte_reference.html`)
+})
+app.get('/vte_outer_ref', redirectMain, (req, res) => {
+    res.sendFile(`${DIST_DIR}/vte_watch/vte_outer_ref.html`)
+})
+app.get('/vte_scales', redirectMain, (req, res) => {
+    res.sendFile(`${DIST_DIR}/vte_watch/vte_scales.html`)
+})
+
 
 app.get('/home', redirectLogin, (req, res) => {
     res.send(`
