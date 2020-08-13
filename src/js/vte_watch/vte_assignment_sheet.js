@@ -1,4 +1,41 @@
 $(document).ready(function () {
+    function correctDate(vD) {
+        return `${vD.getFullYear()}-${('0' + (vD.getMonth() + 1)).slice(-2)}-${('0' + vD.getDate()).slice(-2)}`;
+    }
+    function addDays(date, days) {
+        let result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    }
+    function formatDate() {
+        let d = new Date(),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear(),
+            vDateNow = '';
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+        vDateNow = [year, month, day].join('-');
+        return vDateNow;
+    }
+    function diffDates(dateOne, dateTwo) {
+        return (dateOne - dateTwo) / (60 * 60 * 24 * 1000);
+    }
+
+    const convertDateToRuFormat = (date) => {
+        let vD = new Date(date);
+    
+        function getZero(num) {
+            if (num > 0 && num < 10) {
+                return '0' + num;
+            } else {
+                return num;
+            }
+        }
+        return getZero(vD.getDate()) + '.' + getZero(vD.getMonth() + 1) + '.' + vD.getFullYear()
+    }
+    
+    
 
     let aPat = [], aStepBack= [];
     aPat = JSON.parse(localStorage.getItem('Patient'));
@@ -18,10 +55,10 @@ $(document).ready(function () {
         oUsr = JSON.parse(localStorage.getItem('User'));
     console.log(oPat, oUsr);
 
-    $('<div class="modal" tabindex="-1" role="dialog" id="#divModal" data-backdrop="static"><div class="modal-dialog" role="document" ><div class="modal-content"><div class="modal-body"><p>Вы укажете ФИО, № палаты, № истории б-ни пациента?</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal"  id="btnModalYes_1">Да</button><button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnModalNo_1">Нет</button></div></div></div></div>').modal('show');
-    $('#btnModalYes_1').on('click', () => askPersonDates());
-    $('#btnModalNo_1').on('click', () => askAssignSheet());
-
+    // $('<div class="modal" tabindex="-1" role="dialog" id="#divModal" data-backdrop="static"><div class="modal-dialog" role="document" ><div class="modal-content"><div class="modal-body"><p>Вы укажете ФИО, № палаты, № истории б-ни пациента?</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal"  id="btnModalYes_1">Да</button><button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnModalNo_1">Нет</button></div></div></div></div>').modal('show');
+    // $('#btnModalYes_1').on('click', () => askPersonDates());
+    // $('#btnModalNo_1').on('click', () => askAssignSheet());
+    
     let vAgreement = '',
         vTblAssignSheet = '';
 
@@ -102,7 +139,7 @@ console.log(oPat.aOrdersContainer);
 
         $('#btnOne').on('click', definePersonDates);
     }
-
+    askPersonDates();
     function definePersonDates() {
         console.log('definePersonDates');
         oPat.pkName = $('#inpText_0').val();

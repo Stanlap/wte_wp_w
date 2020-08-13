@@ -115,6 +115,9 @@ app.get('/vte_concl', redirectMain, (req, res) => {
 app.get('/vte_drug', redirectMain, (req, res) => {
     res.sendFile(`${DIST_DIR}/vte_watch/vte_drug.html`)
 })
+app.get('/vte_assignment_sheet', redirectMain, (req, res) => {
+    res.sendFile(`${DIST_DIR}/vte_watch/vte_assignment_sheet.html`)
+})
 
 app.post('/count', redirectMain, (req, res) => {
     res.send(JSON.stringify(countRF.countKindsRF(req.body.rfArr, req.body.aForCounter)));

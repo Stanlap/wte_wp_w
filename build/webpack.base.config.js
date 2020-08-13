@@ -12,6 +12,7 @@ module.exports = {
     main: `${PATHS.pre_js}/main.js`,
     modal_alert: `${PATHS.pre_js}/general/modal_alert.js`,
     regist: `${PATHS.pre_js}/regist.js`,
+    vte_assignment_sheet: `${PATHS.pre_js}/vte_watch/vte_assignment_sheet.js`,
     vte_concl: `${PATHS.pre_js}/vte_watch/vte_concl.js`,
     vte_drug: `${PATHS.pre_js}/vte_watch/vte_drug.js`,
     vte_drug_list: `${PATHS.pre_js}/vte_watch/vte_drug_list.js`,
@@ -133,6 +134,11 @@ module.exports = {
       filename: `${PATHS.dist}/vte_watch/vte_drug.html`,
       template: `${PATHS.pre}/vte_watch/vte_drug.ejs`,
       chunks: ['main','date_manager', 'modal_alert', 'vte_drug', 'vte_drug_list'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.dist}/vte_watch/vte_assignment_sheet.html`,
+      template: `${PATHS.pre}/vte_watch/vte_assignment_sheet.ejs`,
+      chunks: ['main','date_manager', 'vte_assignment_sheet'],
     }),
 
     new FaviconsWebpackPlugin(`${PATHS.src}/img/favicon.png`)
