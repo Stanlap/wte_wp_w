@@ -32,7 +32,7 @@ app.use(session({
 }))
 const neDB = require('./back/bc_nedb')
 const wst = require('./back/chat')
-
+const countRF = require('./back/vte_brain')
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
         res.redirect('/login')
@@ -112,6 +112,13 @@ app.get('/vte_patient_list_rf', redirectMain, (req, res) => {
 app.get('/vte_concl', redirectMain, (req, res) => {
     res.sendFile(`${DIST_DIR}/vte_watch/vte_concl.html`)
 })
+app.get('/vte_drug', redirectMain, (req, res) => {
+    res.sendFile(`${DIST_DIR}/vte_watch/vte_drug.html`)
+})
+
+app.post('/count', redirectMain, (req, res) => {
+    res.send(JSON.stringify(countRF.countKindsRF(req.body.rfArr, req.body.aForCounter)));
+});
 
 
 

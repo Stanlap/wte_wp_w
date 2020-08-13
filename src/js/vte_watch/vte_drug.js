@@ -1,5 +1,13 @@
 $(document).ready(function () {
+    const initModal = (quest, ind) => {
+        $(`<div class="modal" tabindex="-1" role="dialog" id="#divModal_${ind}" data-backdrop="static"><div class="modal-dialog" role="document" ><div class="modal-content"><div class="modal-body"><p>${quest}</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal"  id="btnMYes_${ind}">Да</button><button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnMNo_${ind}">Нет</button></div></div></div></div>`).appendTo('body').show();
+    };
     let vTakesVTEProph = false;
+    let modal = document.getElementById('modYN_1');
+
+    $('#btn1').on('click', function(){
+    modal.style.display = "block";
+    });
 
     initModal('Пациент уже получает антикоагулянтную терапию?', 1);
     $('#btnMYes_1').on('click', () => {
@@ -169,10 +177,8 @@ $(document).ready(function () {
     function checkConditions(oP) {
         oPat.pkDateOfChildbirth === formatDate() ? delete oP['Heparin sodium'] : '';
         if (oPat.pkAge < 18) {
-            with(oP) {
-                delete Apixaban;
-                delete Rivaroxaban;
-            }
+            delete oP['Apixaban'];
+            delete oP['Rivaroxaban'];
             delete oP['Enoxaparin sodium'];
             delete oP['Nadroparin calcium'];
             delete oP['Bemiparinum natrium'];
@@ -181,11 +187,9 @@ $(document).ready(function () {
         };
         (oPat.pkAge > 60) ? delete oP.Warfarin: '';
         if (oPat.pkSevereHepaticFailure) {
-            with(oP) {
-                delete Rivaroxaban;
-                delete Apixaban;
-                delete Warfarin;
-            }
+            delete oP['Apixaban'];
+            delete oP['Rivaroxaban'];
+            delete oP['Warfarin'];
             delete oP['Heparin sodium'];
             delete oP['Dabigatran etexilate'];
             delete oP['Acetylsalicylic acid'];
@@ -211,11 +215,9 @@ $(document).ready(function () {
             });
             // let vAns = confirm('Если пациентка кормит грудью, следует отменить грудное вскармливание. Ваше решение?');
             if (vAns) {
-                with(oP) {
-                    delete Apixaban;
-                    delete Rivaroxaban;
-                    delete Warfarin;
-                }
+                delete oP['Apixaban'];
+                delete oP['Rivaroxaban'];
+                delete oP['Warfarin'];
                 delete oP['Acetylsalicylic acid'];
                 delete oP['Dabigatran etexilate'];
                 delete oP['Heparin sodium'];

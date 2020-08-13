@@ -102,7 +102,10 @@ $('#btnOne').on('click', function () {
     localStorage.setItem('StepBack', JSON.stringify(aStepBack));
         aPat.push(oPat);
         localStorage.setItem('Patient', JSON.stringify(aPat));
-
+        const initModal = (quest, ind) => {
+            $(`<div class="modal" tabindex="-1" role="dialog" id="#divModal_${ind}" data-backdrop="static"><div class="modal-dialog" role="document" ><div class="modal-content"><div class="modal-body"><p>${quest}</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal"  id="btnMYes_${ind}">Да</button><button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnMNo_${ind}">Нет</button></div></div></div></div>`).appendTo('body').show();
+        };
+        
     if (oPat.pkRiskVTE) {
         if (oPat.pkHighRiskOfBleed) {
             initModal('Риск кровотечения высокий. Отменить медикаментозную профилактику ВТЭО?', 1);

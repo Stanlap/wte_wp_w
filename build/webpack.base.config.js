@@ -13,6 +13,8 @@ module.exports = {
     modal_alert: `${PATHS.pre_js}/general/modal_alert.js`,
     regist: `${PATHS.pre_js}/regist.js`,
     vte_concl: `${PATHS.pre_js}/vte_watch/vte_concl.js`,
+    vte_drug: `${PATHS.pre_js}/vte_watch/vte_drug.js`,
+    vte_drug_list: `${PATHS.pre_js}/vte_watch/vte_drug_list.js`,
     vte_mirror_rf: `${PATHS.pre_js}/vte_watch/vte_mirror_rf.js`,
     vte_obst_profile: `${PATHS.pre_js}/vte_watch/vte_obst_profile.js`,
     vte_oper_profile: `${PATHS.pre_js}/vte_watch/vte_oper_profile.js`,
@@ -125,7 +127,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: `${PATHS.dist}/vte_watch/vte_concl.html`,
       template: `${PATHS.pre}/vte_watch/vte_concl.ejs`,
-      chunks: ['main','gfr', 'alert_modal', 'vte_concl'],
+      chunks: ['main','gfr', 'modal_alert', 'vte_concl'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.dist}/vte_watch/vte_drug.html`,
+      template: `${PATHS.pre}/vte_watch/vte_drug.ejs`,
+      chunks: ['main','date_manager', 'modal_alert', 'vte_drug', 'vte_drug_list'],
     }),
 
     new FaviconsWebpackPlugin(`${PATHS.src}/img/favicon.png`)
