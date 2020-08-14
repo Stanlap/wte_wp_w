@@ -354,18 +354,21 @@ $(document).ready(function () {
     }
 
     const initModal = (quest, ind) => {
-        $(`<div class="modal" tabindex="-1" role="dialog" id="#divModal_${ind}" data-backdrop="static"><div class="modal-dialog" role="document" ><div class="modal-content"><div class="modal-body"><p>${quest}</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal"  id="btnMYes_${ind}">Да</button><button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnMNo_${ind}">Нет</button></div></div></div></div>`).appendTo('body').show();
+        $(`<div class="modal" tabindex="-1" role="dialog" id="divModal_${ind}" data-backdrop="static"><div class="modal-dialog" role="document" ><div class="modal-content"><div class="modal-body"><p>${quest}</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal"  id="btnMYes_${ind}">Да</button><button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnMNo_${ind}">Нет</button></div></div></div></div>`).appendTo('body').show();
     };
 
 
 
     let vTakesVTEProph = false;
 
-    // initModal('Пациент уже получает антикоагулянтную терапию?', 1);
-    // $('#btnMYes_1').on('click', () => {
-    //     vTakesVTEProph = true;
-    //     $(this).hide();
-    // });
+    initModal('Пациент уже получает антикоагулянтную терапию?', 1);
+    $('#btnMYes_1').on('click', () => {
+        vTakesVTEProph = true;
+        $('#divModal_1').hide();
+        });
+    $('#btnMNo_1').on('click', () => {
+        $('#divModal_1').hide();
+    });
 
     let aPat = [], aStepBack= [];
     aPat = JSON.parse(localStorage.getItem('Patient'));
@@ -565,7 +568,14 @@ $(document).ready(function () {
             initModal('Если пациентка кормит грудью, следует отменить грудное вскармливание. Ваше решение?', 7);
             $('#btnMYes_7').on('click', () => {
                 vAns = true;
+                $('#divModal_7').hide();
+                });
+            $('#btnMNo_7').on('click', () => {
+                $('#divModal_7').hide();
             });
+        
+
+
             // let vAns = confirm('Если пациентка кормит грудью, следует отменить грудное вскармливание. Ваше решение?');
             if (vAns) {
                 delete oP['Apixaban'];
@@ -642,29 +652,37 @@ $(document).ready(function () {
         console.log('tryChooseDrugGroup');
         if ($('#select_1').val() === 'Гепарин натрия' && oPat.pkPullOfSurg && tCtr[0] === 0) {
             initModal('Гепарин противопоказан при офтальмологических операциях. Отказаться от данного препарата?', 2);
+            
             $('#btnMYes_2').on('click', () => {
                 $('#select_1 :selected').remove();
+                $('#divModal_2').hide();
             });
             $('#btnMNo_2').on('click', () => {
                 tCtr[0] = 1;
+                $('#divModal_2').hide();
             });
         };
         if ($('#select_1').val() === 'Гепарин натрия' && oPat.pkDiabetes && tCtr[1] === 0) {
             initModal('Гепарин противопоказан при наличии диабетической ретинопатии. Отказаться от данного препарата?', 3 );
             $('#btnMYes_3').on('click', () => {
                 $('#select_1 option:selected').remove();
+                $('#divModal_3').hide();
             });
             $('#btnMNo_3').on('click', () => {
                 tCtr[1] = 0;
+                $('#divModal_3').hide();
             });
         };
         if ($('#select_1').val() === 'Ацетилсалициловая кислота' && tCtr[2] === 0) {
             initModal('Ацетилсалициловая кислота противопоказана при приеме с метотрексатом в дозе 15 мг в неделю и более, бронх. астме, индуцированной приемом салицилатов. Отказаться от данного препарата?', 4);
             $('#btnMYes_4').on('click', () => {
                 $('#select_1 option:selected').remove();
+                $('#divModal_4').hide();
+
             });
             $('#btnMNo_4').on('click', () => {
                 tCtr[2] = 1;
+                $('#divModal_4').hide();
             });
         };
         if ($('#select_1').val() === 'Ривароксабан' && tCtr[3] === 0) {
@@ -672,9 +690,11 @@ $(document).ready(function () {
             initModal('Ривароксабан противопоказан при врожденном дефиците лактозы. Отказаться от данного препарата?', 5);
             $('#btnMYes_5').on('click', () => {
                 $('#select_1 option:selected').remove();
+                $('#divModal_5').hide();
             });
             $('#btnMNo_5').on('click', () => {
                 tCtr[3] = 1;
+                $('#divModal_5').hide();
             });
         };
     }
@@ -1197,6 +1217,10 @@ let vBridge = false;
         initModal('Планируется периоперационная мост-терапия?', 8);
         $('#btnMYes_8').on('click', () => {
             vBridge = true;
+            $('#divModal_8').hide();
+        });
+        $('#btnMNo_8').on('click', () => {
+            $('#divModal_8').hide();
         });
         !vBridge ? (clearValues(), executeFuncsLine()) : (
             $('#invitToAct_1').html('Выберите группу препарата для мост-терапии:'),
@@ -1306,13 +1330,15 @@ let vBridge = false;
 
 
     function askOfPrevLabExams() {
-        // initModal('Назначать лабораторные исследования в субботу и воскресенье?', 6);
-        // $('#btnMYes_6').on('click', () => {
-        //     oPat.pkIncludeWeekends = true;
-        // });
-        // $('#btnMNo_6').on('click', () => {
-        //     oPat.pkIncludeWeekends = false;
-        // });
+        initModal('Назначать лабораторные исследования в субботу и воскресенье?', 6);
+        $('#btnMYes_6').on('click', () => {
+            oPat.pkIncludeWeekends = true;
+            $('#divModal_6').hide();
+        });
+        $('#btnMNo_6').on('click', () => {
+            oPat.pkIncludeWeekends = false;
+            $('#divModal_6').hide();
+        });
         oPat.pkIncludeWeekends = true;
         $('#invitToAct_1').html('До начала профилактивки ВТЭО необходимо наличие перечисленных ниже исследований. Если обследование неполное, установите дату и отметьте, какие исследования требуется выполнить:');
         let vTom = addDays(new Date(), 1);
