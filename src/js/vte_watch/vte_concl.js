@@ -6,6 +6,8 @@ aStepBack = JSON.parse(localStorage.getItem('StepBack'));
 let oSc = JSON.parse(localStorage.getItem('objScalesVTE')),
 oPatProto = aPat[aPat.length - 1],
 oPat ={...oPatProto};
+oPat.aOrdersContainer = []; 
+oPat.pkStartDateOfVTEProphyl = oPat.pkDateOfOper;
 
 console.log(aStepBack, aPat, oPat);
 
@@ -105,7 +107,6 @@ $('#btnOne').on('click', function () {
         const initModal = (quest, ind) => {
             $(`<div class="modal" tabindex="-1" role="dialog" id="#divModal_${ind}" data-backdrop="static"><div class="modal-dialog" role="document" ><div class="modal-content"><div class="modal-body"><p>${quest}</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal"  id="btnMYes_${ind}">Да</button><button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnMNo_${ind}">Нет</button></div></div></div></div>`).appendTo('body').show();
         };
-        
     if (oPat.pkRiskVTE) {
         if (oPat.pkHighRiskOfBleed) {
             initModal('Риск кровотечения высокий. Отменить медикаментозную профилактику ВТЭО?', 1);

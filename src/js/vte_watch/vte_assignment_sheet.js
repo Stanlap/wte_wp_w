@@ -63,6 +63,8 @@ $(document).ready(function () {
         vTblAssignSheet = '';
 
     let relDayOfManipul = oPat.pkDateOfOper? 1 + Math.round(diffDates(new Date(oPat.pkDateOfOper), new Date(oPat.pkStartDateOfVTEProphyl))): 0;
+
+    
     oPat.aOrdersContainer.push(['компрессионный трикотаж на ноги', [relDayOfManipul, 1 + relDayOfManipul, 2 + relDayOfManipul]]);
     oPat.pkIsOrNoSurg ? oPat.aOrdersContainer.push(['активизация пациента', [1 + relDayOfManipul, 2 + relDayOfManipul, 3 + relDayOfManipul]]) : '';
     console.log(oPat.aOrdersContainer);
